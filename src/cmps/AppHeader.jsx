@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { TOGGLE_TOYT_IS_SHOWN } from '../store/reducers/toy.reducer.js'
+import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 import { logout } from '../store/actions/user.actions.js'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
@@ -23,20 +23,20 @@ export function AppHeader() {
             })
     }
 
-    function onToggleToyt(ev) {
+    function onToggleCart(ev) {
         ev.preventDefault()
-        dispatch({ type: TOGGLE_TOYT_IS_SHOWN })
+        dispatch({ type: TOGGLE_CART_IS_SHOWN })
     }
 
     return (
         <header className="app-header full main-layout">
             <section className="header-container">
-                <h1>React Toy App</h1>
+                <h1>Mister Toy 🧸</h1>
                 <nav className="app-nav">
                     <NavLink to="/" >Home</NavLink>
                     <NavLink to="/about" >About</NavLink>
                     <NavLink to="/toy" >Toys</NavLink>
-                    <a onClick={onToggleToyt} href="#">🛒 Toyt</a>
+                    <a onClick={onToggleCart} href="#">🛒 Cart</a>
 
                 </nav>
             </section>

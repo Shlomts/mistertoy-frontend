@@ -1,7 +1,7 @@
 import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
-import { ADD_TOY_TO_TOYT } from '../store/reducers/toy.reducer.js'
+import { ADD_TOY_TO_CART } from '../store/reducers/toy.reducer.js'
 import { loadToys, removeToyOptimistic, saveToy, setFilterBy } from '../store/actions/toy.actions.js'
 
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
@@ -39,8 +39,8 @@ export function ToyIndex() {
     }
 
     function onAddToy() {
-        const toyToSave = toyService.getRandomToy()
-        saveToy(toyToSave)
+        const cartoSave = toyService.getRandomToy()
+        saveToy(cartoSave)
             .then((savedToy) => {
                 showSuccessMsg(`Toy added (id: ${savedToy._id})`)
             })
@@ -51,9 +51,9 @@ export function ToyIndex() {
     
     function onEditToy(toy) {
         const price = +prompt('New price?')
-        const toyToSave = { ...toy, price }
+        const cartoSave = { ...toy, price }
 
-        saveToy(toyToSave)
+        saveToy(cartoSave)
             .then((savedToy) => {
                 showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
             })
@@ -62,10 +62,10 @@ export function ToyIndex() {
             })
     }
 
-    function addToToyt(toy) {
-        console.log(`Adding ${toy.vendor} to Toyt`)
-        dispatch({ type: ADD_TOY_TO_TOYT, toy })
-        showSuccessMsg('Added to Toyt')
+    function addToCart(toy) {
+        console.log(`Adding ${toy.name} to Cart`)
+        dispatch({ type: ADD_TOY_TO_CART, toy })
+        showSuccessMsg('Added to Cart')
     }
 
     return (
@@ -80,7 +80,7 @@ export function ToyIndex() {
                         toys={toys}
                         onRemoveToy={onRemoveToy}
                         onEditToy={onEditToy}
-                        addToToyt={addToToyt}
+                        addToCart={addToCart}
                     />
                     : <div>Loading...</div>
                 }

@@ -1,26 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { REMOVE_TOY_FROM_TOYT } from '../store/reducers/toy.reducer.js'
+import { REMOVE_TOY_FROM_CART } from '../store/reducers/toy.reducer.js'
 import { checkout } from '../store/actions/user.actions.js'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
-export function ShoppingCart({ isToytShown }) {
+export function ShoppingCart({ isCartShown }) {
     const dispatch = useDispatch()
     const shoppingCart = useSelector(storeState => storeState.toyModule.shoppingCart)
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
 
-    function removeFromToyt(toyId) {
-        console.log(`Todo: remove: ${toyId} from toyt`)
-        dispatch({ type: REMOVE_TOY_FROM_TOYT, toyId })
+    function removeFromCart(toyId) {
+        console.log(`Todo: remove: ${toyId} from cart`)
+        dispatch({ type: REMOVE_TOY_FROM_CART, toyId })
     }
 
-    function getToytTotal() {
+    function getCartTotal() {
         return shoppingCart.reduce((acc, toy) => acc + toy.price, 0)
     }
 
     function onCheckout() {
-        const amount = getToytTotal()
+        const amount = getCartTotal()
         checkout(amount)
             .then(()=>{
                 showSuccessMsg(`Charged you: $ ${amount.toLocaleString()}`)
@@ -30,18 +30,18 @@ export function ShoppingCart({ isToytShown }) {
             })
     }
 
-    if (!isToytShown) return <span></span>
-    const total = getToytTotal()
+    if (!isCartShown) return <span></span>
+    const total = getCartTotal()
     return (
-        <section className="toyt" >
-            <h5>Your Toyt</h5>
+        <section className="cart" >
+            <h5>Your Cart</h5>
             <ul>
                 {
                     shoppingCart.map((toy, idx) => <li key={idx}>
                         <button onClick={() => {
-                            removeFromToyt(toy._id)
+                            removeFromCart(toy._id)
                         }}>x</button>
-                        {toy.vendor} | ${toy.price}
+                        {toy.name} | ${toy.price}
                     </li>)
                 }
             </ul>

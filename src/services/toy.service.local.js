@@ -24,7 +24,7 @@ function query(filterBy = {}) {
             const regExp = new RegExp(filterBy.txt, 'i')
             return toys.filter(toy =>
             {
-                return regExp.test(toy.vendor) &&
+                return regExp.test(toy.name) &&
                 toy.price <= filterBy.maxPrice
 
             }
@@ -46,24 +46,37 @@ function save(toy) {
     } else {
         // when switching to backend - remove the next line
         toy.owner = userService.getLoggedinUser()
+        toy.createdAt = Date.now()
         return storageService.post(STORAGE_KEY, toy)
     }
 }
 
 function getEmptyToy() {
     return {
-        vendor: '',
+        name: '',
         price: '',
-        speed: '',
+        labels: [],
+        inStock: true,
     }
 }
 
 function getRandomToy() {
     return {
-        vendor: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
-        speed: utilService.getRandomIntInclusive(50, 150),
+        name: 'Talking Doll - ' + (Date.now() % 1000),
+        price: utilService.getRandomIntInclusive(1, 1000),
+        labels: _getRanodmLabels(),
     }
+}
+
+function _getRanodmLabels(){
+    const lab1 = utilService.getRandomIntInclusive(0, 7)
+    const lab2 = utilService.getRandomIntInclusive(0, 7)
+
+    const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
+        'Outdoor', 'Battery Powered'] 
+
+    
+    return [labels[lab1], labels[lab2]]
 }
 
 function getDefaultFilter() {

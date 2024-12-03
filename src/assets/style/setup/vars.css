@@ -1,11 +1,11 @@
 :root {
-  --clr1: #087f81;
-  --clr2: #ae2012;
+  --clr1: #ff04ab;
+  --clr2: #960a98;
 
-  --clr1bg: #c3eddf;
+  --clr1bg: #aaffe3;
   --clr1bg-light: #c1f1e1;
-  --clr2bg: #ee9b00;
-  --clr2bg-light: #e9d8a6;
+  --clr2bg: #ff9ef9;
+  --cartbg: #229efc;
 
   --gray1: rgb(240, 240, 240);
   --gray2: rgb(155, 155, 155);

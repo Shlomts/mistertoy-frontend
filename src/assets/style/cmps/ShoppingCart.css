@@ -1,13 +1,30 @@
-.toyt {
-    background-color: var(--clr2bg-light);
+.cart {
+    background-color: var(--cartbg);
     color: black;
     padding: 20px;
-    position: absolute;
+    position: fixed;
     top: 10px;
     right: 10px;
 }
-.toyt li button {
+
+ul {
+    padding-left: 0%;
+}
+
+.cart li {
+    list-style-type: none;
+}
+
+.cart li button {
     margin: 5px;
+}
+
+.cart button {
+    color: var(--gray3);
+}
+
+.cart button:hover {
+    color: var(--gray1);
 }
 
 

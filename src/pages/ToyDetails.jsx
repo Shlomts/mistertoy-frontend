@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { toyService } from "../services/toy.service.js"
+import { toyService } from "../services/toy.service.local.js"
 import { Link, useParams } from "react-router-dom"
 
 export function ToyDetails() {
@@ -21,7 +21,7 @@ export function ToyDetails() {
     if (!toy) return <div>Loading...</div>
     return (
         <section className="toy-details">
-            <h1>Toy vendor : {toy.vendor}</h1>
+            <h1>Toy name : {toy.name}</h1>
             <h5>Price: ${toy.price}</h5>
             <p>⛐</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi voluptas cumque tempore, aperiam sed dolorum rem! Nemo quidem, placeat perferendis tempora aspernatur sit, explicabo veritatis corrupti perspiciatis repellat, enim quibusdam!</p>
