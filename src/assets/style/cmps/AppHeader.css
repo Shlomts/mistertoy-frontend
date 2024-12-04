@@ -8,3 +8,7 @@
     display: flex;
     gap: 15px;
 }
+
+.head-user span{
+    font-size: large;
+}

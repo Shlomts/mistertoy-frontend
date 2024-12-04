@@ -39,8 +39,8 @@ export function ToyIndex() {
     }
 
     function onAddToy() {
-        const cartoSave = toyService.getRandomToy()
-        saveToy(cartoSave)
+        const toyToSave = toyService.getRandomToy()
+        saveToy(toyToSave)
             .then((savedToy) => {
                 showSuccessMsg(`Toy added (id: ${savedToy._id})`)
             })

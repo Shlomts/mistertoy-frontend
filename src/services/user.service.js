@@ -50,7 +50,7 @@ function updateScore(diff) {
 }
 
 function getById(userId) {
-    return axios.get('/api/user/' + userId).then(res => res.data)
+    return httpService.get('/api/user/' + userId)
 }
 
 function getLoggedinUser() {

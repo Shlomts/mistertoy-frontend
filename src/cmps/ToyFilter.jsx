@@ -13,7 +13,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
     function handleChange({ target }) {
         let { value, name: field, type } = target
         value = type === 'number' ? +value : value
-        if (value = type === 'checkbox') target.checked ? 1 : -1
+        // if (value = type === 'checkbox') target.checked ? 1 : -1
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
@@ -21,7 +21,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
         <section className="toy-filter full main-layout">
             <h2>Toys Filter</h2>
             <form >
-                <label htmlFor="name">name:</label>
+                <label htmlFor="name">Name:</label>
                 <input type="text"
                     id="name"
                     name="txt"

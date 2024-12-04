@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { toyService } from "../services/toy.service.local.js"
+import { toyService } from "../services/toy.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { saveToy } from "../store/actions/toy.actions.js"
 import { useEffect, useState } from "react"
@@ -26,7 +26,7 @@ export function ToyEdit() {
     function handleChange({ target }) {
         let { value, type, name: field } = target
         value = type === 'number' ? +value : value
-        if (value = type === 'checkbox') target.checked ? 1 : -1
+        // if (value = type === 'checkbox') target.checked ? 1 : -1
         setToytoEdit((prevToy) => ({ ...prevToy, [field]: value }))
     }
 
