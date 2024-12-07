@@ -2,7 +2,7 @@ import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 import { ADD_TOY_TO_CART } from '../store/reducers/toy.reducer.js'
-import { loadToys, removeToyOptimistic, saveToy, setFilterBy } from '../store/actions/toy.actions.js'
+import { loadToys, removeToyOptimistic, saveToy, setFilterBy, loadLabels } from '../store/actions/toy.actions.js'
 
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
@@ -14,6 +14,7 @@ export function ToyIndex() {
 
     const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
+    const labels = useSelector(storeState => storeState.toyModule.labels)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
@@ -23,7 +24,12 @@ export function ToyIndex() {
                 showErrorMsg('Cannot load toys!')
             })
     }, [filterBy])
+
+    useEffect(() => {
+        loadLabels()
+    }, [])
     
+
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
     }
@@ -74,7 +80,7 @@ export function ToyIndex() {
             <main>
                 <Link to="/toy/edit">Add Toy</Link>
                 <button className='add-btn' onClick={onAddToy}>Add Random Toy ⛐</button>
-                <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+                <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} labels={labels} />
                 {!isLoading 
                     ? <ToyList
                         toys={toys}

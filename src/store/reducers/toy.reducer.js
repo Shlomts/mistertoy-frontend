@@ -1,20 +1,26 @@
-import { toyService } from "../../services/toy.service.js"
+import { labels, toyService } from "../../services/toy.service.js"
 
 //* Toys
-export const SET_TOYS = 'SET_TOYS'
-export const REMOVE_TOY = 'REMOVE_TOY'
-export const ADD_TOY = 'ADD_TOY'
-export const UPDATE_TOY = 'UPDATE_TOY'
-export const TOY_UNDO = 'TOY_UNDO'
+export const SET_TOYS = "SET_TOYS"
+export const REMOVE_TOY = "REMOVE_TOY"
+export const ADD_TOY = "ADD_TOY"
+export const UPDATE_TOY = "UPDATE_TOY"
+export const TOY_UNDO = "TOY_UNDO"
+
+//* Labels
+export const SET_LABELS = "SET_LABELS"
+
+export const SET_FILTER_BY = "SET_FILTER_BY"
+export const SET_IS_LOADING = "SET_IS_LOADING"
 
 //* Shopping cart
-export const TOGGLE_CART_IS_SHOWN = 'TOGGLE_CART_IS_SHOWN'
-export const ADD_TOY_TO_CART = 'ADD_TOY_TO_CART'
-export const REMOVE_TOY_FROM_CART = 'REMOVE_TOY_FROM_CART'
-export const CLEAR_CART = 'CLEAR_CART'
+export const TOGGLE_CART_IS_SHOWN = "TOGGLE_CART_IS_SHOWN"
+export const ADD_TOY_TO_CART = "ADD_TOY_TO_CART"
+export const REMOVE_TOY_FROM_CART = "REMOVE_TOY_FROM_CART"
+export const CLEAR_CART = "CLEAR_CART"
 
-export const SET_FILTER_BY = 'SET_FILTER_BY'
-export const SET_IS_LOADING = 'SET_IS_LOADING'
+
+
 
 const initialState = {
     toys: [],
@@ -22,7 +28,8 @@ const initialState = {
     shoppingCart: [],
     isLoading: false,
     filterBy: toyService.getDefaultFilter(),
-    lastToys: []
+    lastToys: [],
+    labels: [],
 }
 
 export function toyReducer(state = initialState, action = {}) {
@@ -34,19 +41,25 @@ export function toyReducer(state = initialState, action = {}) {
             const lastToys = [...state.toys]
             return {
                 ...state,
-                toys: state.toys.filter(toy => toy._id !== action.toyId),
-                lastToys
+                toys: state.toys.filter((toy) => toy._id !== action.toyId),
+                lastToys,
             }
         case ADD_TOY:
             return {
                 ...state,
-                toys: [...state.toys, action.toy]
+                toys: [...state.toys, action.toy],
             }
         case UPDATE_TOY:
             return {
                 ...state,
-                toys: state.toys.map(toy => toy._id === action.toy._id ? action.toy : toy)
+                toys: state.toys.map((toy) =>
+                    toy._id === action.toy._id ? action.toy : toy
+                ),
             }
+
+        //* Labels
+        case SET_LABELS:
+            return { ...state, labels: action.labels }
 
         //* Shopping cart
         case TOGGLE_CART_IS_SHOWN:
@@ -55,11 +68,13 @@ export function toyReducer(state = initialState, action = {}) {
         case ADD_TOY_TO_CART:
             return {
                 ...state,
-                shoppingCart: [...state.shoppingCart, action.toy]
+                shoppingCart: [...state.shoppingCart, action.toy],
             }
 
         case REMOVE_TOY_FROM_CART:
-            const shoppingCart = state.shoppingCart.filter(toy => toy._id !== action.toyId)
+            const shoppingCart = state.shoppingCart.filter(
+                (toy) => toy._id !== action.toyId
+            )
             return { ...state, shoppingCart }
 
         case CLEAR_CART:
@@ -68,18 +83,18 @@ export function toyReducer(state = initialState, action = {}) {
         case SET_FILTER_BY:
             return {
                 ...state,
-                filterBy: { ...state.filterBy, ...action.filterBy }
+                filterBy: { ...state.filterBy, ...action.filterBy },
             }
 
         case SET_IS_LOADING:
             return {
                 ...state,
-                isLoading: action.isLoading
+                isLoading: action.isLoading,
             }
         case TOY_UNDO:
             return {
                 ...state,
-                toys: [...state.lastToys]
+                toys: [...state.lastToys],
             }
 
         default:

@@ -1,17 +1,26 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-import { saveToy } from "../store/actions/toy.actions.js"
+import { saveToy, loadLabels } from "../store/actions/toy.actions.js"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { LabelsList } from '../cmps/LabelsList.jsx'
 
 
 export function ToyEdit() {
     const navigate = useNavigate()
-    const [toytoEdit, setToytoEdit] = useState(toyService.getEmptyToy())
+
     const { toyId } = useParams()
+    const [toytoEdit, setToytoEdit] = useState(toyService.getEmptyToy())
+    const labels = useSelector(storeState => storeState.toyModule.labels)
+
 
     useEffect(() => {
         if (toyId) loadToy()
+    }, [])
+
+    useEffect(() => {
+        loadLabels()
     }, [])
 
     function loadToy() {
@@ -25,8 +34,9 @@ export function ToyEdit() {
 
     function handleChange({ target }) {
         let { value, type, name: field } = target
+
         value = type === 'number' ? +value : value
-        // if (value = type === 'checkbox') target.checked ? 1 : -1
+        if(type === 'checkbox') value = target.checked ? true : false
         setToytoEdit((prevToy) => ({ ...prevToy, [field]: value }))
     }
 
@@ -65,19 +75,14 @@ export function ToyEdit() {
                     value={toytoEdit.price}
                     onChange={handleChange}
                 />
-                <label htmlFor="labels">Labels : </label>
-                <input type="search"
-                    name="labels"
-                    id="labels"
-                    placeholder="Enter labels"
-                    value={toytoEdit.labels}
-                    onChange={handleChange}
-                />
+                <label htmlFor="labels">Labels : 
+                <LabelsList labels={labels} onChange={handleChange}/>
+                </label>
+
                 <label htmlFor="inStock">In Stock? </label>
                 <input type="checkbox"
-                    name="in-stock"
+                    name="inStock"
                     id="in-stock"
-                    value={toytoEdit.inStock}
                     onChange={handleChange}
                 />
 
