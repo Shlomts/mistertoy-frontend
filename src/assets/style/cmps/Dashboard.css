@@ -1,0 +1,12 @@
+
+.charts{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-bottom: 3em;
+}
+
+.charts h2{
+    display: block;
+    padding: 0;
+    margin: 0;
+}

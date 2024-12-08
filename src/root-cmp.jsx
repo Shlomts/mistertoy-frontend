@@ -8,6 +8,8 @@ import { store } from './store/store.js'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
 import { UserDetails } from './pages/UserDetails.jsx'
+import { Dashboard } from './pages/Dashboard.jsx'
+
 import { Provider } from 'react-redux'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
@@ -27,6 +29,7 @@ export function App() {
                             <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
                             <Route element={<ToyDetails />} path="/toy/:toyId" />
                             <Route element={<UserDetails />} path="/user/:userId" />
+                            <Route element={<Dashboard />} path="/dashboard" />
                         </Routes>
                     </main>
                     <AppFooter />
