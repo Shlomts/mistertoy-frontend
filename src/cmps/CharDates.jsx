@@ -19,7 +19,7 @@ export function CharDates({labels}) {
 
     return (
         <section className="char dates">
-            <h3>Percentage of toys in Stock per label</h3>
+            <h3>Sales</h3>
             <Line data={data} />
         </section>
     )
