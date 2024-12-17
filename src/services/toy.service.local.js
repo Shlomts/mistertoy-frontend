@@ -1,8 +1,8 @@
-import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
+import { storageService } from "./async-storage.service.js"
+import { utilService } from "./util.service.js"
+import { userService } from "./user.service.js"
 
-const STORAGE_KEY = 'toyDB'
+const STORAGE_KEY = "toyDB"
 
 _createToys()
 
@@ -13,23 +13,22 @@ export const toyService = {
     remove,
     getEmptyToy,
     getRandomToy,
-    getDefaultFilter
+    getDefaultFilter,
 }
 
-function query(filterBy = {}) {
-    return storageService.query(STORAGE_KEY)
-        .then(toys => {
-            if (!filterBy.txt) filterBy.txt = ''
-            if (!filterBy.maxPrice) filterBy.maxPrice = Infinity
-            const regExp = new RegExp(filterBy.txt, 'i')
-            return toys.filter(toy =>
-            {
-                return regExp.test(toy.name) &&
-                toy.price <= filterBy.maxPrice
-
-            }
-            )
+async function query(filterBy = {}) {
+    try {
+        const toys = await storageService.query(STORAGE_KEY)
+        if (!filterBy.txt) filterBy.txt = ""
+        if (!filterBy.maxPrice) filterBy.maxPrice = Infinity
+        const regExp = new RegExp(filterBy.txt, "i")
+        return toys.filter((toy) => {
+            return regExp.test(toy.name) && toy.price <= filterBy.maxPrice
         })
+    } catch (err) {
+        console.log("toy service local -> Cannot load toys", err)
+        throw err
+    }
 }
 
 function getById(toyId) {
@@ -53,8 +52,8 @@ function save(toy) {
 
 function getEmptyToy() {
     return {
-        name: '',
-        price: '',
+        name: "",
+        price: "",
         labels: [],
         inStock: true,
     }
@@ -62,25 +61,32 @@ function getEmptyToy() {
 
 function getRandomToy() {
     return {
-        name: 'Talking Doll - ' + (Date.now() % 1000),
+        name: "Talking Doll - " + (Date.now() % 1000),
         price: utilService.getRandomIntInclusive(1, 1000),
         labels: _getRanodmLabels(),
     }
 }
 
-function _getRanodmLabels(){
+function _getRanodmLabels() {
     const lab1 = utilService.getRandomIntInclusive(0, 7)
     const lab2 = utilService.getRandomIntInclusive(0, 7)
 
-    const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
-        'Outdoor', 'Battery Powered'] 
+    const labels = [
+        "On wheels",
+        "Box game",
+        "Art",
+        "Baby",
+        "Doll",
+        "Puzzle",
+        "Outdoor",
+        "Battery Powered",
+    ]
 
-    
     return [labels[lab1], labels[lab2]]
 }
 
 function getDefaultFilter() {
-    return { txt: '', maxPrice: '' }
+    return { txt: "", maxPrice: "" }
 }
 
 function _createToys() {
@@ -88,7 +94,7 @@ function _createToys() {
     if (toys && toys.length > 0) return
 
     toys = []
-    for(var i = 0; i < 12; i++){
+    for (var i = 0; i < 12; i++) {
         const toy = getRandomToy()
         toy._id = utilService.makeId()
         toys.push(toy)

@@ -1,10 +1,11 @@
 import { ToyPreview } from "./ToyPreview.jsx"
+import { utilService } from "../services/util.service.js"
 
 export function ToyList({ toys, onRemoveToy, onEditToy, addToCart }) {
     return (
         <ul className="toy-list">
-            {toys.map(toy =>
-                <li className="toy-preview" key={toy._id}>
+            {toys.map((toy) => (
+                <li className="toy-preview" key={utilService.makeId()}>
                     <ToyPreview toy={toy} />
 
                     <div>
@@ -15,7 +16,8 @@ export function ToyList({ toys, onRemoveToy, onEditToy, addToCart }) {
                     <button className="buy" onClick={() => addToCart(toy)}>
                         Add to Cart
                     </button>
-                </li>)}
+                </li>
+            ))}
         </ul>
     )
 }

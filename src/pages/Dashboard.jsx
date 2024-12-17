@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 import { useEffect } from "react"
 
 import { loadToys, loadLabels } from "../store/actions/toy.actions.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 import { CharPrice } from "../cmps/CharPrice.jsx"
 import { CharInventory } from "../cmps/CharInventory.jsx"
