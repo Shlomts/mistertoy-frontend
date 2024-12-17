@@ -77,6 +77,7 @@ function _setLoggedinUser(user) {
         _id: user._id,
         fullname: user.fullname,
         balance: user.balance,
+        isAdmin: user.isAdmin,
     }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave

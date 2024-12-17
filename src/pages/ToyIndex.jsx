@@ -1,4 +1,6 @@
 import { toyService } from "../services/toy.service.js"
+import { userService } from "../services/user.service.js"
+
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 
 import { ADD_TOY_TO_CART } from "../store/reducers/toy.reducer.js"
@@ -21,6 +23,7 @@ export function ToyIndex() {
     const toys = useSelector((storeState) => storeState.toyModule.toys)
     const labels = useSelector((storeState) => storeState.toyModule.labels)
     const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
+    const user = useSelector((storeState) => storeState.userModule.loggedInUser)
     const isLoading = useSelector(
         (storeState) => storeState.toyModule.isLoading
     )
@@ -62,19 +65,19 @@ export function ToyIndex() {
         }
     }
 
-    async function onEditToy(toy) {
-        const price = +prompt("New price?")
-        const cartoSave = { ...toy, price }
+    // async function onEditToy(toy) {
+    //     const price = +prompt("New price?")
+    //     const cartoSave = { ...toy, price }
 
-        try {
-            const savedToy = await saveToy(cartoSave)
-            showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
-        } catch (err) {
-            showErrorMsg("Cannot update toy")
-            console.log("async storage service -> Cannot remove entity >>", err)
-            throw err
-        }
-    }
+    //     try {
+    //         const savedToy = await saveToy(cartoSave)
+    //         showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
+    //     } catch (err) {
+    //         showErrorMsg("Cannot update toy")
+    //         console.log("async storage service -> Cannot remove entity >>", err)
+    //         throw err
+    //     }
+    // }
 
     function addToCart(toy) {
         console.log(`Adding ${toy.name} to Cart`)
@@ -83,13 +86,18 @@ export function ToyIndex() {
     }
 
     return (
-        <div>
+        <div className="toy-index">
             <h3>Toys App</h3>
             <main>
-                <Link to="/toy/edit">Add Toy</Link>
-                <button className="add-btn" onClick={onAddToy}>
-                    Add Random Toy ⛐
-                </button>
+                {user && user.isAdmin && (
+                    <section>
+                        <Link to="/toy/edit">Add Toy</Link>
+                        <button className="add-btn" onClick={onAddToy}>
+                            Add Random Toy ⛐
+                        </button>
+                    </section>
+                )}
+
                 <ToyFilter
                     filterBy={filterBy}
                     onSetFilter={onSetFilter}
@@ -99,7 +107,7 @@ export function ToyIndex() {
                     <ToyList
                         toys={toys}
                         onRemoveToy={onRemoveToy}
-                        onEditToy={onEditToy}
+                        // onEditToy={onEditToy}
                         addToCart={addToCart}
                     />
                 ) : (
@@ -110,3 +118,4 @@ export function ToyIndex() {
         </div>
     )
 }
+
