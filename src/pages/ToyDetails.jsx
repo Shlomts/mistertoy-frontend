@@ -39,7 +39,7 @@ export function ToyDetails() {
             }
             {toy.msgs && toy.msgs.length > 0 && (
                 <section>
-                    Masseges:
+                    Messages:
                     {toy.msgs.map((msg) => (
                         <article key={msg._id}>
                             {msg.txt}
