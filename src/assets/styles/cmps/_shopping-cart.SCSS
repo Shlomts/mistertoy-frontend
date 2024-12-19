@@ -1,0 +1,28 @@
+.cart {
+    background-color: $cartbg;
+    color: $gray3;
+    padding: 20px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+
+    ul {
+        padding-left: 0%;
+    }
+
+    li {
+        list-style-type: none;
+
+        button {
+            margin: 5px;
+        }
+    }
+
+    button {
+        color: $gray3;
+
+        &:hover {
+            color: $gray1;
+        }
+    }
+}

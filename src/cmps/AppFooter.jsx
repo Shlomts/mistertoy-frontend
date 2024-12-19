@@ -33,7 +33,7 @@ export function AppFooter() {
                     ({isCartShown ? "hide" : "show"})
                 </a>
             </h5>
-            <p>Coffeerights to all ©️</p>
+            <h3>Coffeerights to all ©️</h3>
             <ShoppingCart isCartShown={isCartShown} />
             <UserMsg />
         </footer>

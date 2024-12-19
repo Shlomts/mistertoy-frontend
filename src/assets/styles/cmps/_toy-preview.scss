@@ -1,0 +1,25 @@
+.toy-preview {
+    text-align: center;
+    padding: 0.3em;
+    display: flex;
+    flex-direction: column;
+
+    h4 {
+        text-transform: capitalize;
+        color: $gray3;
+    }
+
+    img {
+        max-width: 100px;
+    }
+
+    a {
+        text-decoration: none;
+        color: $clr2;
+    
+        &.active {
+            background-color: $clr1;
+            color: $clr2;
+        }
+    }
+}

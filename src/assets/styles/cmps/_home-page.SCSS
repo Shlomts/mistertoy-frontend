@@ -1,0 +1,29 @@
+.home {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 40px;
+
+    img {
+        display: flex;
+        flex-grow: 1;
+        max-inline-size: 15%;
+    }
+
+    .home-txt {
+        display: block; 
+        align-self: center;
+    }
+    
+    .home-h2{
+        font-size: 2em;
+    }
+    
+    .home-p{
+        font-size: large;
+    }
+    
+    .small-lttrs{
+        font-size: small;
+    }
+    
+}

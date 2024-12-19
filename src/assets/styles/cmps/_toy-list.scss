@@ -1,0 +1,53 @@
+.toy-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.9em;
+
+    li {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: $clr1bg;
+        padding: 0.65em;
+        max-width: 300px;
+    }
+}
+
+
+
+// .cards-container {
+//     grid-template-areas:
+//       "c1 c1 c2 c2 t t"
+//       ". . c3 c3 t t";
+  
+//     > .card {
+//       display: grid;
+//       align-content: space-between;
+//       background-color: $clr3;
+//       color: $clr2;
+//       aspect-ratio: 1 / 1;
+//       padding: 10%;
+//       margin: 1px 1px 0 0;
+  
+//       .card-image {
+//         aspect-ratio: 1 / 0.7;
+//         object-fit: contain;
+//       }
+  
+//       &:nth-child(1) {
+//         grid-area: c1;
+//       }
+//       &:nth-child(2) {
+//         grid-area: c2;
+//       }
+//       &:nth-child(3) {
+//         grid-area: c3;
+//       }
+//     }
+  
+//     .teaser {
+//       grid-area: t;
+//     }
+//   }
+  

@@ -46,9 +46,9 @@ export function AppHeader() {
                     <span to={`/user/${user._id}`}>Hi {user.fullname}</span>
                     <button onClick={onLogout}>Logout</button>
                     {user.balance ? (
-                        <p> Your Balance: ${user.balance.toLocaleString()}</p>
+                        <h3> Your Balance: ${user.balance.toLocaleString()}</h3>
                     ) : (
-                        <p>Please add to balance</p>
+                        <h3>Please add to balance</h3>
                     )}
                 </section>
             ) : (

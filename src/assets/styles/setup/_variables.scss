@@ -1,0 +1,33 @@
+
+// COLOR PALETTE
+$clr1: #ff04ab;
+$clr2: darekn($clr1, 30%);
+$clr3: invert($clr1);
+$clr4: complement($clr1);
+
+
+$clr5: rgb(255, 119, 0);
+$clr6: rgb(182, 37, 255);
+$clr7: rgb(13, 200, 13);
+$clr8: rgb(237, 255, 181);
+
+$clr1bg: #aaffe3;
+$clr1bg-light: #c1f1e1;
+$clr2bg: #ff9ef9;
+$cartbg: #5eecff;
+
+$gray1: rgb(240, 240, 240);
+$gray2: rgb(155, 155, 155);
+$gray3: rgb(44, 44, 44);
+
+// LAYOUT
+$layoutPadding: 20px;
+
+// LAYOUT BREAKPOINTS
+$break-narrow: 1200px;
+$break-normal: 1360px;
+$break-wide: 1920px;
+
+$padded-break-narrow: $break-narrow + $layoutPadding * 2;
+$padded-break-normal: $break-normal + $layoutPadding * 2;
+$padded-break-wide: $break-wide + $layoutPadding * 2;
