@@ -19,7 +19,7 @@ export function HomePage() {
                 <h2 className="home-h2">Toy shop</h2>
                 <p className="home-p">The house for your money </p>
                 <p className="small-lttrs">
-                    we accept all kinds of payment including PAYPAL and AMAX
+                    We accept all kinds of payment including PAYPAL and AMAX.
                 </p>
             </section>
 
