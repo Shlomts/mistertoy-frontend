@@ -73,5 +73,5 @@ function _getRanodmLabels() {
 }
 
 function getDefaultFilter() {
-    return { txt: "", maxPrice: "", labels: [], inStock: "" }
+    return { txt: "", maxPrice: undefined, labels: [], inStock: null }
 }

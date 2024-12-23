@@ -68,8 +68,8 @@ export function ToyFilter({ filterBy, onSetFilter, labels }) {
                             onChange={handleChange}
                         >
                             <option value="">All</option>
-                            <option value="yes">YUP!</option>
-                            <option value="no">NOPE..</option>
+                            <option value="yes">YES! 😍</option>
+                            <option value="no">NO.. 💩</option>
                         </select>
                     </Form>
                 )}

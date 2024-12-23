@@ -86,6 +86,7 @@ export function ToyEdit() {
                     type="checkbox"
                     name="inStock"
                     id="in-stock"
+                    checked={toytoEdit.inStock}
                     onChange={handleChange}
                 />
 

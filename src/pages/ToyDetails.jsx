@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react"
-import { toyService } from "../services/toy.service.js"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { utilService } from "../services/util.service.js"
+
+import { toyService } from "../services/toy.service.js"
+import { userService } from "../services/user.service.js"
 
 export function ToyDetails() {
+    const dispatch = useDispatch()
+
     const [toy, setToy] = useState(null)
     const { toyId } = useParams()
+
+    const user = useSelector((storeState) => storeState.userModule.loggedInUser)
 
     const navigate = useNavigate()
 
@@ -29,15 +35,15 @@ export function ToyDetails() {
             <h3>{toy.name}</h3>
             {!toy.inStock && <h4>OUT OF STOCK</h4>}
             <h5>Only: ${toy.price} !!</h5>
-            {toy.labels && toy.labels.length > 0 &&
+            {toy.labels?.length > 0 && (
                 <p>
                     Labels:{" "}
                     {toy.labels.map((label) => (
                         <div>{label}</div>
                     ))}
                 </p>
-            }
-            {toy.msgs && toy.msgs.length > 0 && (
+            )}
+            {toy.msgs?.length > 0 && (
                 <section>
                     Messages:
                     {toy.msgs.map((msg) => (
@@ -49,7 +55,10 @@ export function ToyDetails() {
                     ))}
                 </section>
             )}
-            <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp;
+            {user?.isAdmin && (
+                <Link to={`/toy/edit/${toy._id}`}>Edit</Link>
+            )}
+             &nbsp;
             <Link to={`/toy`}>Back</Link>
             {/* <p>
                 <Link to="/toy/nJ5L4">Next Toy</Link>

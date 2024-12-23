@@ -24,7 +24,7 @@ export function Dashboard() {
     function toysByLabelObj() {
         return labels.reduce((acc, label) => {
             acc[label] = toys.filter(
-                (toy) => toy.labels && toy.labels.includes(label)
+                (toy) => toy.labels?.includes(label)
             )
             return acc
         }, {})

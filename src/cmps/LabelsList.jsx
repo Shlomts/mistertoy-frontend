@@ -20,9 +20,9 @@ const MenuProps = {
     },
 }
 
-function getStyles(name, personName, theme) {
+function getStyles(label, labelOpts, theme) {
     return {
-        fontWeight: personName.includes(name)
+        fontWeight: labelOpts.includes(label)
             ? theme.typography.fontWeightMedium
             : theme.typography.fontWeightRegular,
     }
@@ -30,14 +30,14 @@ function getStyles(name, personName, theme) {
 
 export function LabelsList({ labels, onChange }) {
     const theme = useTheme()
-    const [personName, setPersonName] = useState([])
+    const [labelOpts, setLabelOpts] = useState([])
 
     const handleChange = (ev) => {
         onChange(ev)
         const {
             target: { value },
         } = ev
-        setPersonName(
+        setLabelOpts(
             // On autofill we get a stringified value.
             typeof value === "string" ? value.split(",") : value
         )
@@ -52,7 +52,7 @@ export function LabelsList({ labels, onChange }) {
                     labelId="demo-multiple-chip-label"
                     id="demo-multiple-chip"
                     multiple
-                    value={personName}
+                    value={labelOpts}
                     onChange={handleChange}
                     input={
                         <OutlinedInput id="select-multiple-chip" label="Chip" />
@@ -72,7 +72,7 @@ export function LabelsList({ labels, onChange }) {
                         <MenuItem
                             key={name}
                             value={name}
-                            style={getStyles(name, personName, theme)}
+                            style={getStyles(name, labelOpts, theme)}
                         >
                             {name}
                         </MenuItem>

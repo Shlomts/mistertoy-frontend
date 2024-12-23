@@ -41,7 +41,7 @@ async function ajax(endpoint, method = 'GET', data = null) {
         console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `, data)
         console.dir(err)
 
-        if (err.response && err.response.status === 401) sessionStorage.clear()
+        if (err.response?.status === 401) sessionStorage.clear()
         return Promise.reject(err)
     }
 }

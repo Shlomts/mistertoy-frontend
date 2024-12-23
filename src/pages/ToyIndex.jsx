@@ -1,6 +1,4 @@
 import { toyService } from "../services/toy.service.js"
-import { userService } from "../services/user.service.js"
-
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 
 import { ADD_TOY_TO_CART } from "../store/reducers/toy.reducer.js"
@@ -29,9 +27,11 @@ export function ToyIndex() {
     )
 
     useEffect(() => {
-        loadToys().catch((err) => {
+        try {
+            loadToys()
+        } catch (err) {
             showErrorMsg("Cannot load toys!")
-        })
+        }
     }, [filterBy])
 
     useEffect(() => {
@@ -87,9 +87,8 @@ export function ToyIndex() {
 
     return (
         <div className="toy-index">
-            <h3>Toys App</h3>
             <main>
-                {user && user.isAdmin && (
+                {user?.isAdmin && (
                     <section>
                         <Link to="/toy/edit">Add Toy</Link>
                         <button className="add-btn" onClick={onAddToy}>

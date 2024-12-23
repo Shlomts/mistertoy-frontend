@@ -91,7 +91,7 @@ function getDefaultFilter() {
 
 function _createToys() {
     var toys = utilService.loadFromStorage(STORAGE_KEY)
-    if (toys && toys.length > 0) return
+    if (toys?.length > 0) return
 
     toys = []
     for (var i = 0; i < 12; i++) {
